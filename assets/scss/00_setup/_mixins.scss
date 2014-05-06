@@ -1,0 +1,51 @@
+/*==========================================================================
+ REUSABEL MIXINS
+==========================================================================*/
+
+/* Media queries & IE
+========================================================================== */
+/*
+Source: http://jakearchibald.github.io/sass-ie/
+You want to write mobile first css right? Problem is that IE < 9 ignores media
+queries. The solution below allows you to write your code in media queries as normal but only output code from particular media queries (for example desktop
+ size) in your IE stylesheet. There is also a mixin for keeping IE only stying seperate  
+*/
+/*
+Media query mixin.
+Usage:
+
+.examplecss {
+    margin: 10px;
+    @include respond-min(960px) {
+        margin: 20px;
+    } 
+}
+*/
+
+$fix-mqs: false !default;
+
+@mixin respond-min($width) {
+    // If we're outputting for a fixed media query set...
+    @if $fix-mqs {
+        // ...and if we should apply these rules...
+        @if $fix-mqs >= $width {
+            // ...output the content the user gave us.
+            @content;
+        }
+    }
+    @else {
+        // Otherwise, output it using a regular media query
+        @media screen and (min-width: $width) {
+            @content;
+        }
+    }
+}
+
+$old-ie: false !default;
+
+@mixin old-ie {
+    // Only use this content if we're dealing with old IE
+    @if $old-ie {
+        @content;
+    }
+}

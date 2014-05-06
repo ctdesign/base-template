@@ -1,0 +1,89 @@
+/*==========================================================================
+ MAIN
+==========================================================================*/
+/*
+This file imports all partials in a specific order and outputs to a css
+file. Refer to the individual partial files for a description of what they 
+contain. Think of this as a table of contents.
+*/
+
+/* 1. Setup
+========================================================================== */
+/*
+Any fancy Sass voodoo that you want to reuse throughout the project.
+*/
+@import "00_setup/config";
+@import "00_setup/mixins";
+
+/* 2. Base
+========================================================================== */
+/*
+This section contains the default styling for every HTML element. There should
+only be rules for HTML elements ('h1', 'p') and pseudo-classes (for eg ':hover'). 
+Class selectors should be organised into the Components folder as they can be 
+reused anywhere.
+*/
+
+@import "01_base/normalize";
+@import "01_base/base";
+  // @import "base/heading";
+  // @import "base/paragraph";
+  // @import "base/list";
+  // @import "base/form";
+  // @import "base/table";
+  // @import "base/media";
+
+/* 3. Layout
+========================================================================== */
+/*
+Layout styles are usually your grid or proportianal layout system. If you do not require a grid
+system you can store any classes/id's you use for declaring the page
+structure here (for eg '#header', '#aside', '#footer').
+*/
+
+@import "02_layout/layout";
+
+/* 4. Components 
+========================================================================== */
+/*
+Components are reusable, modular parts of a page. They should all be class selectors.
+
+There are two folders in this section to denote the 2 different types of 
+component; Element components and modular components.
+*/
+
+/* 4.1 Components - element modifiers
+--------------------------------------------------------------------------- */
+/*
+These are component that can ONLY be used with a specific HTML element (for eg a 
+rule for adding stripes to tables, or removing bullet styles). Essentially they 
+extend a HTML element with different styling options. 
+*/
+
+@import "03_components/_components-elements";
+
+
+
+/* 4.2 Components - modular
+--------------------------------------------------------------------------- */
+/*
+With a Modular Component, the markup used is usually irrelevant.
+(for eg pagination, or a callout style). 
+  
+*/
+
+@import "03_components/_components-modules"; 
+
+/* 5. Plugins
+========================================================================== */
+/*
+For 3rd party plugin css, usually jQuery plugins
+*/
+@import "04_plugins/plugins";
+
+
+/* Other
+========================================================================== */
+@import "print";
+@import "shame"; //for nasty css we all have to do from time to time to just make things work
+
