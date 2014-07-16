@@ -5,13 +5,13 @@ BASE STYLES
 /* General
 ========================================================================== */
 /* Box Sizing */
-/* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
-*, *:before, *:after {
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box; 
+/* http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/*/
+html {
   box-sizing: border-box;
- }
-
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 /* Headings
 ========================================================================== */
