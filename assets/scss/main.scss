@@ -11,8 +11,8 @@ Project is built using vanilla sass watch - no compass or other dependencies
 @import "partials/mixins";
 
 // General class-less CSS
-@import "partials/base";
 @import "partials/normalize";
+@import "partials/base";
 
 // All you Class's should be here
 @import "partials/components";
