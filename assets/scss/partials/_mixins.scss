@@ -1,0 +1,132 @@
+/*==========================================================================
+ REUSABLE MIXINS
+==========================================================================*/
+
+/* REMS
+========================================================================== */
+/*
+Usage:
+    p {
+      @include font-size(14px)
+    }
+*/
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+/* Media Queries
+========================================================================== */
+/*
+Usage:
+    .sidebar {
+      width: 60%
+      @include bp-small {
+        width: 100%;
+      }
+    }
+*/
+
+@mixin bp-gt-mob-a {
+  @media only screen and (min-width: 320px) {
+    @content;
+  }
+}
+
+@mixin bp-gt-mob-b {
+  @media only screen and (min-width: 360px) {
+    @content;
+  }
+}
+
+@mixin bp-gt-mob-c {
+  @media only screen and (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin bp-gt-tablet {
+  @media only screen and (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin bp-gt-desk {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+/* Transitions
+========================================================================== */
+/*
+Usage:
+    a {
+      color: gray;
+      @include transition(color .3s ease);
+      &:hover {
+        color: black;
+      }
+    }
+*/
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+/* Media queries & IE
+========================================================================== */
+/*
+Source: http://jakearchibald.github.io/sass-ie/
+You want to write mobile first css right? Problem is that IE < 9 ignores media
+queries. The solution below allows you to write your code in media queries as normal but only output code from particular media queries (for example desktop
+ size) in your IE stylesheet. There is also a mixin for keeping IE only stying seperate  
+*/
+/*
+Media query mixin.
+Usage:
+
+.examplecss {
+    margin: 10px;
+    @include respond-min(960px) {
+        margin: 20px;
+    } 
+}
+*/
+
+$fix-mqs: false !default;
+
+@mixin respond-min($width) {
+    // If we're outputting for a fixed media query set...
+    @if $fix-mqs {
+        // ...and if we should apply these rules...
+        @if $fix-mqs >= $width {
+            // ...output the content the user gave us.
+            @content;
+        }
+    }
+    @else {
+        // Otherwise, output it using a regular media query
+        @media screen and (min-width: $width) {
+            @content;
+        }
+    }
+}
+
+$old-ie: false !default;
+
+@mixin old-ie {
+    // Only use this content if we're dealing with old IE
+    @if $old-ie {
+        @content;
+    }
+}

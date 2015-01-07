@@ -2,14 +2,8 @@
  MAIN
 ==========================================================================*/
 /*
-This file imports all partials in a specific order and outputs to a css
-file. Refer to the individual partial files for a description of what they 
-contain. Think of this as a table of contents.
-*/
-/* 1. Setup
-========================================================================== */
-/*
-Any fancy Sass voodoo that you want to reuse throughout the project.
+Class names are contructed using BEM syntax
+Project is built using vanilla sass watch - no compass or other dependencies
 */
 /*==========================================================================
  CONFIG
@@ -20,8 +14,39 @@ Setup of common variables, spacing etc
 /* Colors
 ========================================================================== */
 /*==========================================================================
- REUSABEL MIXINS
+ REUSABLE MIXINS
 ==========================================================================*/
+/* REMS
+========================================================================== */
+/*
+Usage:
+    p {
+      @include font-size(14px)
+    }
+*/
+/* Media Queries
+========================================================================== */
+/*
+Usage:
+    .sidebar {
+      width: 60%
+      @include bp-small {
+        width: 100%;
+      }
+    }
+*/
+/* Transitions
+========================================================================== */
+/*
+Usage:
+    a {
+      color: gray;
+      @include transition(color .3s ease);
+      &:hover {
+        color: black;
+      }
+    }
+*/
 /* Media queries & IE
 ========================================================================== */
 /*
@@ -41,15 +66,32 @@ Usage:
     } 
 }
 */
-/* 2. Base
+/*==========================================================================
+BASE STYLES
+==========================================================================*/
+/* General
 ========================================================================== */
-/*
-This section contains the default styling for every HTML element. There should
-only be rules for HTML elements ('h1', 'p') and pseudo-classes (for eg ':hover'). 
-Class selectors should be organised into the Components folder as they can be 
-reused anywhere.
-*/
-/* normalize.css v3.0.1 | MIT License | git.io/normalize */
+/* Box Sizing */
+/* http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/*/
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+/* Headings
+========================================================================== */
+/* Paras and lists
+========================================================================== */
+/* Links
+========================================================================== */
+/* Media
+========================================================================== */
+/* Tables
+========================================================================== */
+/* Forms
+========================================================================== */
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
@@ -406,80 +448,32 @@ th {
   padding: 0; }
 
 /*==========================================================================
-BASE STYLES
+ HEADING
 ==========================================================================*/
-/* General
-========================================================================== */
-/* Box Sizing */
-/* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
-*, *:before, *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
-
-/* Headings
-========================================================================== */
-/* Paras and lists
-========================================================================== */
-/* Links
-========================================================================== */
-/* Media
-========================================================================== */
-/* Tables
-========================================================================== */
-/* Forms
-========================================================================== */
-/* 3. Layout
-========================================================================== */
 /*
-Layout styles are usually your grid or proportianal layout system. If you do not require a grid
-system you can store any classes/id's you use for declaring the page
-structure here (for eg '#header', '#aside', '#footer').
+Log description.
 */
+/* 2ns Heading
+========================================================================== */
+/* 3rd heading */
 /*==========================================================================
- LAYOUT
+ HELPERS
 ==========================================================================*/
-.inner {
-  margin: 0 auto;
-  max-width: 1000px; }
-
-/* 4. Components 
+/* ==========================================================================
+Helper classes
 ========================================================================== */
 /*
-Components are reusable, modular parts of a page. They should all be class selectors.
-
-There are two folders in this section to denote the 2 different types of 
-component; Element components and modular components.
+* Hide visually and from screen readers:
+* http://juicystudio.com/article/screen-readers-display-none.php
 */
-/* 4.1 Components - element modifiers
---------------------------------------------------------------------------- */
-/*
-These are component that can ONLY be used with a specific HTML element (for eg a 
-rule for adding stripes to tables, or removing bullet styles). Essentially they 
-extend a HTML element with different styling options. 
-*/
-/*==========================================================================
- COMPONENTS ELEMENTS
-==========================================================================*/
-/* Clearfix
-========================================================================== */
-.cf:before,
-.cf:after {
-  content: " ";
-  display: table; }
-
-.cf:after {
-  clear: both; }
-
-.cf {
-  *zoom: 1; }
-
-/* Showing and hiding content
-========================================================================== */
 .hidden {
   display: none !important;
   visibility: hidden; }
 
+/*
+* Hide only visually, but have it available for screen readers:
+* http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+*/
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -490,6 +484,11 @@ extend a HTML element with different styling options.
   position: absolute;
   width: 1px; }
 
+/*
+* Extends the .visuallyhidden class to allow the element
+* to be focusable when navigated to via the keyboard:
+* https://www.drupal.org/node/897638
+*/
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
   clip: auto;
@@ -499,53 +498,97 @@ extend a HTML element with different styling options.
   position: static;
   width: auto; }
 
+/*
+* Hide visually and from screen readers, but maintain layout
+*/
 .invisible {
   visibility: hidden; }
 
-/* 4.2 Components - modular
---------------------------------------------------------------------------- */
 /*
-With a Modular Component, the markup used is usually irrelevant.
-(for eg pagination, or a callout style). 
-  
+* Clearfix: contain floats
+*
+* For modern browsers
+* 1. The space content is one way to avoid an Opera bug when the
+* `contenteditable` attribute is included anywhere else in the document.
+* Otherwise it causes space to appear at the top and bottom of elements
+* that receive the `clearfix` class.
+* 2. The use of `table` rather than `block` is only necessary if using
+* `:before` to contain the top-margins of child elements.
 */
+.cf:before,
+.cf:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+.cf:after {
+  clear: both; }
+
 /*==========================================================================
- HEADING
+ LAYOUT
 ==========================================================================*/
-/*
-Log description.
-*/
-/* 2ns Heading
-========================================================================== */
-/* 3rd heading */
-/* 5. Plugins
-========================================================================== */
-/*
-For 3rd party plugin css, usually jQuery plugins
-*/
+.inner {
+  margin: 0 auto;
+  max-width: 1000px; }
+
 /*==========================================================================
- PLUGINS
+ PRINT ONLY STYLES
 ==========================================================================*/
-/*
-@import any plugin css or any 3rd party css here
-*/
-/* Other
-========================================================================== */
-/*==========================================================================
- HEADING
-==========================================================================*/
-/*
-Log description.
-*/
-/* 2ns Heading
-========================================================================== */
-/* 3rd heading */
-/*==========================================================================
- HEADING
-==========================================================================*/
-/*
-Log description.
-*/
-/* 2ns Heading
-========================================================================== */
-/* 3rd heading */
+@media print {
+  *,
+  *:before,
+  *:after {
+    background: transparent !important;
+    color: #000 !important;
+                        /* Black prints faster:
+http://www.sanbeiji.com/archives/953 */
+    box-shadow: none !important;
+    text-shadow: none !important; }
+
+  a,
+  a:visited {
+    text-decoration: underline; }
+
+  a[href]:after {
+    content: " (" attr(href) ")"; }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")"; }
+
+  /*
+  * Don't show links that are fragment identifiers,
+  * or use the `javascript:` pseudo protocol
+  */
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: ""; }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid; }
+
+  /*
+  * Printing Tables:
+  * http://css-discuss.incutio.com/wiki/Printing_Tables
+  */
+  thead {
+    display: table-header-group; }
+
+  tr,
+  img {
+    page-break-inside: avoid; }
+
+  img {
+    max-width: 100% !important; }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3; }
+
+  h2,
+  h3 {
+    page-break-after: avoid; } }
